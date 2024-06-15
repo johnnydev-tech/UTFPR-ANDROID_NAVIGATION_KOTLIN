@@ -20,6 +20,7 @@ class LaunchActivity : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,13 +48,16 @@ class LaunchActivity : AppCompatActivity() {
     }
 
     private fun btListarOnClick() {
-//        val intent = Intent(this, LaunchActivity::class.java)
-//        startActivity(intent)
+        val intent = Intent(this, ListActivity::class.java)
+        startActivity(intent)
         Toast.makeText(this, "Listar", Toast.LENGTH_SHORT).show()
     }
 
     private fun btConfirmOnCLick() {
         val intent = Intent(this, ConfirmActivity::class.java)
+        intent.putExtra("cod", etCod.text.toString())
+        intent.putExtra("qtd", etQtd.text.toString())
+        intent.putExtra("valor", etValor.text.toString())
         startActivity(intent)
     }
 }
