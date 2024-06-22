@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -49,8 +50,19 @@ class LaunchActivity : AppCompatActivity() {
 
     private fun btListarOnClick() {
         val intent = Intent(this, ListActivity::class.java)
-        startActivity(intent)
+//        startActivity(intent)
         Toast.makeText(this, "Listar", Toast.LENGTH_SHORT).show()
+        getResult.launch(intent)
+
+    }
+
+    private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if(it.resultCode == RESULT_OK){
+            if (it.data != null){
+                val cod =it.data?.getIntExtra("codeRetorno",0)
+                etCod.setText(cod.toString());
+            }
+        }
     }
 
     private fun btConfirmOnCLick() {
